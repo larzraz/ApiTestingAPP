@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ApiTesting.RequestListPage">
+    <ContentPage.Content>
+        <StackLayout Padding="10,20,10,10">
+            <Label x:Name="requestLabel" Text="Hest"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <ListView ItemsSource="{Binding}"
+            >
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell>
+                            <Grid HorizontalOptions="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding TextTranslated}"/>
+
+                            </Grid>
+                        </ViewCell>
+                       
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

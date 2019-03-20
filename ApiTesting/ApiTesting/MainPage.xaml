@@ -2,13 +2,31 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ApiTesting"
-             x:Class="ApiTesting.MainPage">
+             x:Class="ApiTesting.MainPage"
+             Title="Testing">
+    <ContentPage.ToolbarItems>
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <ToolbarItem Text="Refresh" Icon="ic_autorenew.png" Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+    <StackLayout Padding="10,20,10,10">
+
+        <StackLayout Orientation="Horizontal">
+           
+            <Button HorizontalOptions="FillAndExpand" Text="Opret nyt spørgsmål">
+                
+            </Button>
+        </StackLayout>
+
+    <ListView ItemsSource="{Binding}"
+              ItemTapped="ListView_ItemTapped">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                    <TextCell Text="{Binding  TextToTranslate}" Detail="{Binding LanguageTarget}">
+                   
+                </TextCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
     </StackLayout>
 
 </ContentPage>
