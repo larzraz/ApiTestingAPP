@@ -30,6 +30,12 @@ namespace ApiTesting
             
             InitializeComponent();
             requestLabel.Text = item.TextToTranslate;
+            Update();
+        }
+
+        async void Update()
+        {
+            await requestManager.GetAll();
         }
     }
 }

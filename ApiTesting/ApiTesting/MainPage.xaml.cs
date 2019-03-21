@@ -37,5 +37,23 @@ namespace ApiTesting
             await Navigation.PushModalAsync(
                 new RequestListPage(requestManager, requests, (Request)e.Item));
         }
+
+        async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(
+                new CreateNewRequest(requestManager));
+        }
+
+        async void MenuItem_Clicked(object sender, EventArgs e)
+        {
+            MenuItem item = (MenuItem)sender;
+            Request request = item.CommandParameter as Request;
+            if (request != null)
+            {
+                await Navigation.PushModalAsync(
+               new CreateNewAnswerPage(requestManager,request));
+
+            }
+        }
     }
 }

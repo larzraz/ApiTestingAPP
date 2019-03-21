@@ -12,17 +12,22 @@
 
         <StackLayout Orientation="Horizontal">
            
-            <Button HorizontalOptions="FillAndExpand" Text="Opret nyt spørgsmål">
+            <Button x:Name="CreateNewButton" HorizontalOptions="FillAndExpand" Text="Opret nyt spørgsmål" Clicked="Button_Clicked">
                 
             </Button>
         </StackLayout>
 
     <ListView ItemsSource="{Binding}"
-              ItemTapped="ListView_ItemTapped">
+              ItemTapped="ListView_ItemTapped"
+              >
         <ListView.ItemTemplate>
             <DataTemplate>
-                    <TextCell Text="{Binding  TextToTranslate}" Detail="{Binding LanguageTarget}">
-                   
+                    <TextCell Text="{Binding  TextToTranslate}" Detail="{Binding ID}">
+                        <TextCell.ContextActions>
+                            <MenuItem Clicked="MenuItem_Clicked"
+                                      CommandParameter="{Binding}"
+                                      Text="test"/>
+                        </TextCell.ContextActions>
                 </TextCell>
             </DataTemplate>
         </ListView.ItemTemplate>

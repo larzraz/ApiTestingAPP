@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ApiTesting.CreateNewAnswerPage">
+    <ContentPage.Content>
+        <StackLayout Padding="10,20,10,20">
+            <TableView Intent="Form">
+                <TableRoot>
+                    <TableSection Title="Request">
+                        
+                        <EntryCell x:Name="textToTranslateEntry" Label="Request:" Text="{Binding TextToTranslate}"/>
+                    </TableSection>
+                    <TableSection Title="Oversættelse">
+                        <EntryCell x:Name="TranslatedTextEntry" Label="Oversat Text:" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <StackLayout Padding="0,0,20,0" >
+                <Button x:Name="submitNewAnswerButton" Clicked="SubmitNewAnswerButton_Clicked"  Text="Opret Svar" VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
