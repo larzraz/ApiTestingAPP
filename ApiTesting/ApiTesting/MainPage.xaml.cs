@@ -55,5 +55,10 @@ namespace ApiTesting
 
             }
         }
+
+        async void ColorRequests()
+        {
+
+        }
     }
 }

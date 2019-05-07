@@ -9,13 +9,16 @@ namespace ApiTesting.Data
     {
         public Request()
         {
-           // Answers = new HashSet<Answer>();
+            //Answer ans = new Answer{ RequestId = this.RequestId, TextTranslated = "jan"};
+            //this.Answers.Add(ans);
         }
         public string LanguageOrigin { get; set; }
         public string LanguageTarget { get; set; }
         public string TextToTranslate { get; set; }
         public ObservableCollection<Answer> Answers { get; set; }
+        public bool IsClosed { get; set; }
+        public int noOfAnswers { get; set; }
 
-        public int ID { get; set; }
+        public int RequestId { get; set; }
     }
 }

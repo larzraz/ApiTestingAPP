@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ApiTesting.CreateNewRequest">
     <ContentPage.Content>
-        <StackLayout Padding="10,20,10,20">
+        <StackLayout Style="{StaticResource baggroundStyle}" Padding="10,20,10,20">
             <TableView Intent="Form">
                 <TableRoot>
                     <TableSection Title="Request">
-                        <EntryCell x:Name="textToTranslateEntry" Label="Request:" Placeholder="Indtast Reqeust her" Text="{Binding TextToTranslate}"/>
+                        <EntryCell x:Name="textToTranslateEntry" Label="Request:" Placeholder="Indtast Request her" Text="{Binding TextToTranslate}"/>
                     </TableSection>
                     <TableSection Title="Vælg Sprog">
                         <EntryCell x:Name="LanguageOriginEntry" Label="Orignal Sprog:" Text="{Binding LanguageOrigin}"/>

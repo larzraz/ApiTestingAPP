@@ -2,13 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ApiTesting"
+            
              x:Class="ApiTesting.MainPage"
              Title="Testing">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IsRequestOpenColorConverter x:Key="IsClosedToColor"></local:IsRequestOpenColorConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
 
         <ToolbarItem Text="Refresh" Icon="ic_autorenew.png" Clicked="ToolbarItem_Clicked" />
     </ContentPage.ToolbarItems>
-    <StackLayout Padding="10,20,10,10">
+    <StackLayout Style="{StaticResource baggroundStyle}" Padding="0,20,0,10">
 
         <StackLayout Orientation="Horizontal">
            
@@ -18,17 +24,43 @@
         </StackLayout>
 
     <ListView ItemsSource="{Binding}"
-              ItemTapped="ListView_ItemTapped"
+              ItemTapped="ListView_ItemTapped" RowHeight="-1" HasUnevenRows="True"
               >
         <ListView.ItemTemplate>
             <DataTemplate>
-                    <TextCell Text="{Binding  TextToTranslate}" Detail="{Binding ID}">
-                        <TextCell.ContextActions>
+                    <ViewCell>
+                        <Frame Margin="0,5,0,5" BackgroundColor="{Binding IsClosed, Converter={StaticResource IsClosedToColor}}">
+                            <Grid>
+                        <Grid Padding="0,10,0,10" HorizontalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="60" />
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                            <Label HorizontalOptions="CenterAndExpand" Grid.Row="0" FontSize="15" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding TextToTranslate}"/>
+                                    <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Text="Fra"/>
+                                    <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Text="{Binding LanguageOrigin}"/>
+                                    <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Text="Til"/>
+                                    <Label HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" Text="{Binding LanguageTarget}"/>
+                                    
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                        <ViewCell.ContextActions>
                             <MenuItem Clicked="MenuItem_Clicked"
                                       CommandParameter="{Binding}"
-                                      Text="test"/>
-                        </TextCell.ContextActions>
-                </TextCell>
+                                      Text="Oversæt Tekst"/>
+                        </ViewCell.ContextActions>
+                        
+                    </ViewCell>
+                    
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

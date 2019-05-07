@@ -30,6 +30,7 @@ namespace ApiTesting
             request.LanguageTarget = LanguageTargetEntry.Text;
             request.TextToTranslate = textToTranslateEntry.Text;
             await manager.CreateNewRequest(request);
+            //await this.Navigation.PopAsync();
         }
     }
 }
