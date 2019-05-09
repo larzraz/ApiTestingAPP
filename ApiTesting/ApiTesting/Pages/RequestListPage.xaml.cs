@@ -93,5 +93,23 @@ namespace ApiTesting
             await DisplayAlert("Answer Details", "oversættelse: " + Translated, "Anbefal: " + Recommend);
 
         }
+
+        private async void CreateNewAnswerBtn_Clicked(object sender, EventArgs e)
+        {
+           
+            
+            if (item != null)
+            {
+                await Navigation.PushModalAsync(
+               new CreateNewAnswerPage(requestManager, item));
+            }
+
+        }
+
+        private async void GoBackBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+
+        }
     }
 }

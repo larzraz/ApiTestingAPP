@@ -17,6 +17,7 @@ namespace ApiTesting
         private Request _request = new Request();
         private readonly RequestManager manager;
         private Answer answer = new Answer();
+        private IList<Answer> answers = new ObservableCollection<Answer>();
         readonly IList<Request> requests = new ObservableCollection<Request>();
         public CreateNewAnswerPage(RequestManager manager, Request request)
 		{
@@ -31,21 +32,21 @@ namespace ApiTesting
             answer.TextTranslated = TranslatedTextEntry.Text;
             answer.RequestId = _request.RequestId;
             await manager.AddAnswerToRequest(answer, _request);
-            Update();
+            Update();            
+            await Navigation.PopModalAsync();
            
         }
         async void Update()
         {
-            IEnumerable<Request> requestCollection = await manager.GetAll();
 
-            foreach (Request request in requestCollection)
+            IEnumerable<Answer> answerCollection = await manager.GetAnswersForRequestAsync(_request);
+            foreach (Answer answer in answerCollection)
             {
-                if(_request.Answers.All(b => b.ID != answer.ID))
-                {
-                    _request.Answers.Add(answer);
-                }
-               
+                if (answers.All(b => b.AnswerId != answer.AnswerId))
+                    answers.Add(answer);
             }
+           
+            
         }
         
 }

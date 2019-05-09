@@ -9,8 +9,7 @@ namespace ApiTesting.Data
     {
         public Request()
         {
-            //Answer ans = new Answer{ RequestId = this.RequestId, TextTranslated = "jan"};
-            //this.Answers.Add(ans);
+
         }
         public string LanguageOrigin { get; set; }
         public string LanguageTarget { get; set; }

@@ -15,6 +15,10 @@
             <Button x:Name="CloseRequestLabel" Text="Luk spørgsmålet"
                     VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" FontSize="30" Clicked="CloseRequestLabel_Clicked"/>
+            <Button x:Name="CreateNewAnswerBtn" Text="Oversæt tekst"
+                    VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" FontSize="30" Clicked="CreateNewAnswerBtn_Clicked"/>
+            
 
             <ListView RowHeight="-1" HasUnevenRows="True" Margin="0,10,0,0" ItemsSource="{Binding}"
             >
@@ -24,8 +28,8 @@
                             <Frame Margin="0,5,0,5" BackgroundColor="PaleVioletRed">
                             <Grid HorizontalOptions="Center">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="60"/>
-                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
@@ -35,7 +39,8 @@
 
                                 <Label HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand"  Grid.Row="0" Grid.Column="0" Text="{Binding TextTranslated}"/>
                                     <Label HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand"  Grid.Row="0" Grid.Column="1" Text="{Binding IsPreferred}"/>
-                                    <Button  HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding ID}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Clicked="Prefered_Button_Clicked"/>
+                                    <Button  HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand" Text="{Binding AnswerId , StringFormat=' {0} '}" Grid.Row="1" Grid.Column="0"  Clicked="Prefered_Button_Clicked"/>
+                                   
                                 </Grid>
                             </Frame>
                         </ViewCell>
@@ -43,6 +48,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button x:Name="GoBackBtn" Text="Cancel"
+                    VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" FontSize="30" Clicked="GoBackBtn_Clicked"/> 
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

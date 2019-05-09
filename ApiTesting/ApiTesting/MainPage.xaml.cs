@@ -30,6 +30,7 @@ namespace ApiTesting
                 if (requests.All(b => b.TextToTranslate != request.TextToTranslate))
                     requests.Add(request);
             }
+            //requestCollection.OrderByDescending<Request, requestID>();
         }
 
         async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -56,9 +57,6 @@ namespace ApiTesting
             }
         }
 
-        async void ColorRequests()
-        {
-
-        }
+      
     }
 }

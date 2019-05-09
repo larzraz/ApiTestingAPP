@@ -18,24 +18,21 @@ namespace ApiTesting.Data
 
         const string Url = "http://10.0.2.2:5000/api/requests/getall";
 #else
-        const string Url = "http://127.0.0.1:7001/api/";
-        //const string Url = "http://10.0.2.2:7001/api/";
+        const string Url = "http://127.0.0.1:7000/api/";
+        //const string Url = "http://10.0.2.2:7000/api/";
 
 #endif
 
 
         private HttpClient GetClient()
         {
-            
-
-            HttpClient httpClient = new HttpClient();
+          HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
             return httpClient;
         }
 
         public async Task<Request> CreateNewRequest(Request request)
         {
-
             HttpClient client = GetClient();
             var response = await client.PostAsync(Url + "requests", new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"));
             return JsonConvert.DeserializeObject<Request>(await response.Content.ReadAsStringAsync());
@@ -61,41 +58,37 @@ namespace ApiTesting.Data
             HttpClient client = GetClient();
             var response = await client.PostAsync(Url + "requests/" + request.RequestId + "/answer", new StringContent(JsonConvert.SerializeObject(answer), Encoding.UTF8, "application/json"));
             return JsonConvert.DeserializeObject<Answer>(await response.Content.ReadAsStringAsync());
-
         }
         public async void UpdateIsPreferredValueForAnswer(int answerID, Request request)
         {
-
-            HttpClient client = GetClient();
-            var method = new HttpMethod("PATCH");
-
-            string jsonData = "{\"requestId\":" + request.RequestId + ", \"answerId\":" + answerID + ", \"isPreferred\": true}";
-
-            string jData = @"{
-            'requestId':'" + request.RequestId + ", 'answerId':" + answerID + ", 'isPreferred': 'true'}";
-           
-
-            var requestmessage = new HttpRequestMessage(method, Url + "requests/" + request.RequestId + "/answer/" + answerID + "/correct")
+            List<object> myObj = new List<object>
             {
-                Content = new StringContent(jData, Encoding.UTF8, "application/json")
+                new { requestId = request.RequestId, answerId = answerID, isPreferred = true }
             };
-
+            HttpClient client = GetClient();
+            var method = new HttpMethod("PATCH");            
+            HttpRequestMessage requestmessage = new HttpRequestMessage(method, Url + "answers/ispreferred")
+            {
+                
+            };
+            requestmessage.Content = new StringContent(JsonConvert.SerializeObject(myObj), Encoding.UTF8, "application/json-patch+json");
             var response = await client.SendAsync(requestmessage);
         }
         public async void CloseRequest( Request request)
         {
-
+           
+            request.IsClosed = request.IsClosed ? false : true;
             HttpClient client = GetClient();
-            var method = new HttpMethod("PATCH");
-            var requestmessage = new HttpRequestMessage(method, Url + "requests/" + request.RequestId + "/close")
-            {
-                Content = new StringContent("", Encoding.UTF8, "application/json")
-            };
-
-            var response = await client.SendAsync(requestmessage);
+            string json = JsonConvert.SerializeObject(request);
+            await client.PatchAsync(Url + "requests/isClosed", new StringContent(json, Encoding.UTF8, "application/json"));
         }
+        
 
+               
 
+            
+
+        
     }
     
 }
