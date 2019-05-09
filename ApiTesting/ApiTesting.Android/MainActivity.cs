@@ -21,7 +21,15 @@ namespace ApiTesting.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+            try
+            {
+                LoadApplication(new App());
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

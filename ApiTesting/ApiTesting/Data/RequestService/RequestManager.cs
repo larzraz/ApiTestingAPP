@@ -18,8 +18,8 @@ namespace ApiTesting.Data
 
         const string Url = "http://10.0.2.2:5000/api/requests/getall";
 #else
-        const string Url = "http://127.0.0.1:7000/api/";
-        //const string Url = "http://10.0.2.2:7000/api/";
+        //const string Url = "http://127.0.0.1:7000/api/";
+        const string Url = "http://10.0.2.2:7000/api/";
 
 #endif
 
