@@ -22,7 +22,14 @@ namespace ApiTesting
 
         public RequestListPage ()
 		{
-			InitializeComponent ();
+            try
+            {
+                InitializeComponent();
+            }
+            catch(Exception e)
+            {
+                DisplayAlert("alert", e.ToString(), "ok");
+            }
 		}
 
          public RequestListPage(RequestManager requestManager, IList<Request> requests, Request item)
@@ -71,26 +78,19 @@ namespace ApiTesting
             string Translated = Translated_label.Text;
             string Prefered = Prefered_Label.Text;
             int Id = int.Parse(Prefered_Button.Text); 
-            requestManager.UpdateIsPreferredValueForAnswer(Id,item);
+            //requestManager.UpdateIsPreferredValueForAnswer();
 
             
         }
 
-        private void CloseRequestLabel_Clicked(object sender, EventArgs e)
+        private async void CloseRequestLabel_Clicked(object sender, EventArgs e)
         {
-            requestManager.CloseRequest(item);
-        }
-        async void DisplayData(object Sender, EventArgs e)
-        {
-            var buttonClickHandler = (Button)Sender;
-            Grid parentGridLayout = (Grid)buttonClickHandler.Parent;            
-            Label Translated_label = (Label)parentGridLayout.Children[0];
-            Label Recommended_Label = (Label)parentGridLayout.Children[1];
-            Button Recommend_Button = (Button)parentGridLayout.Children[2];
-
-            string Translated = Translated_label.Text;
-            string Recommend = Recommended_Label.Text;
-            await DisplayAlert("Answer Details", "oversættelse: " + Translated, "Anbefal: " + Recommend);
+              bool close = await DisplayAlert("Er du sikker på du vil lukke den?", "", "ja", "nej");
+            if (close == true)
+            {
+                requestManager.CloseRequest(item);
+                await Navigation.PopModalAsync();
+                }
 
         }
 
@@ -110,6 +110,16 @@ namespace ApiTesting
         {
             await Navigation.PopModalAsync();
 
+        }
+
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            bool answer = await DisplayAlert("", "Vil du gerne vælge denne som favorit?", "Ja", "nej");
+
+            if (answer == true)
+            {
+                requestManager.UpdateIsPreferredValueForAnswer((Answer)e.Item);
+            }
         }
     }
 }

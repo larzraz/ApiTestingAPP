@@ -10,5 +10,6 @@ namespace ApiTesting.Data.UserService
         
         public string Username { get; set; }
         public string Password { get; set; }
+
     }
 }

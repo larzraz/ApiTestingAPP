@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ApiTesting"
              x:Class="ApiTesting.RequestListPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IsPreferredAnswerColorConverter x:Key="IsPreferredToColor"></local:IsPreferredAnswerColorConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
 
         <ToolbarItem Text="Refresh" Icon="ic_autorenew.png" Clicked="ToolbarItem_Clicked" />
@@ -9,37 +15,29 @@
     <ContentPage.Content>
         
         <StackLayout Style="{StaticResource baggroundStyle}" Padding="10,20,10,10">
-            <Label x:Name="requestLabel" Text="Hest"
+            <Label x:Name="requestLabel" Text=""
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" FontSize="30" />
-            <Button x:Name="CloseRequestLabel" Text="Luk spørgsmålet"
-                    VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" FontSize="30" Clicked="CloseRequestLabel_Clicked"/>
-            <Button x:Name="CreateNewAnswerBtn" Text="Oversæt tekst"
-                    VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" FontSize="30" Clicked="CreateNewAnswerBtn_Clicked"/>
-            
-
-            <ListView RowHeight="-1" HasUnevenRows="True" Margin="0,10,0,0" ItemsSource="{Binding}"
+                     
+            <ListView RowHeight="-1" ItemTapped="ListView_ItemTapped" HasUnevenRows="True" Margin="0,10,0,0" ItemsSource="{Binding}"
             >
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
-                            <Frame Margin="0,5,0,5" BackgroundColor="PaleVioletRed">
+                            <Frame Margin="0,5,0,5" BackgroundColor="{Binding IsPreferred, Converter={StaticResource IsPreferredToColor}}">
                             <Grid HorizontalOptions="Center">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
+                                    
                                     </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    
                                     </Grid.ColumnDefinitions>
 
                                 <Label HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand"  Grid.Row="0" Grid.Column="0" Text="{Binding TextTranslated}"/>
-                                    <Label HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand"  Grid.Row="0" Grid.Column="1" Text="{Binding IsPreferred}"/>
-                                    <Button  HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand" Text="{Binding AnswerId , StringFormat=' {0} '}" Grid.Row="1" Grid.Column="0"  Clicked="Prefered_Button_Clicked"/>
+                                                                        
                                    
                                 </Grid>
                             </Frame>
@@ -48,9 +46,19 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="GoBackBtn" Text="Cancel"
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="CreateNewAnswerBtn" Text="Oversæt tekst"
                     VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" FontSize="30" Clicked="GoBackBtn_Clicked"/> 
+                HorizontalOptions="CenterAndExpand" FontSize="Small" Clicked="CreateNewAnswerBtn_Clicked"/>
+                <Button x:Name="CloseRequestLabel" Text="Luk spørgsmålet"
+                    VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" FontSize="Small" Clicked="CloseRequestLabel_Clicked"/>
+                <Button x:Name="GoBackBtn" Text="Cancel"
+                    VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" FontSize="Small" Clicked="GoBackBtn_Clicked"/>
+            </StackLayout>
+            
+             
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

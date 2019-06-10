@@ -16,7 +16,7 @@ namespace ApiTesting.Pages
 	{
         readonly IList<Request> requests = new ObservableCollection<Request>();
         readonly RequestManager requestManager = new RequestManager();
-        public RequestForUserToAnswer ()
+        public RequestForUserToAnswer()
 		{
             BindingContext = requests;
             Update();
@@ -68,7 +68,10 @@ namespace ApiTesting.Pages
                 new CreateNewRequest(requestManager));
         }
 
-        async void MenuItem_Clicked(object sender, EventArgs e)
+        async void MenuItem_Clicked
+            
+            
+             (object sender, EventArgs e)
         {
             MenuItem item = (MenuItem)sender;
             Request request = item.CommandParameter as Request;

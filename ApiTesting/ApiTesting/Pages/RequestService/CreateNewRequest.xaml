@@ -16,6 +16,7 @@
                 </TableRoot>
             </TableView>
             <StackLayout Padding="0,0,20,0" >
+                <Button x:Name="AddPhotoButton" Clicked="AddPhotoButton_Clicked" Text="Tilføj Billede" VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
                 <Button x:Name="submitButton" Clicked="SubmitButton_Clicked" Text="Opret Request" VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
             

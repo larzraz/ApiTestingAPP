@@ -59,20 +59,12 @@ namespace ApiTesting.Data
             var response = await client.PostAsync(Url + "requests/" + request.RequestId + "/answer", new StringContent(JsonConvert.SerializeObject(answer), Encoding.UTF8, "application/json"));
             return JsonConvert.DeserializeObject<Answer>(await response.Content.ReadAsStringAsync());
         }
-        public async void UpdateIsPreferredValueForAnswer(int answerID, Request request)
+        public async void UpdateIsPreferredValueForAnswer(Answer answer)
         {
-            List<object> myObj = new List<object>
-            {
-                new { requestId = request.RequestId, answerId = answerID, isPreferred = true }
-            };
+            answer.IsPreferred = answer.IsPreferred ? false : true;
             HttpClient client = GetClient();
-            var method = new HttpMethod("PATCH");            
-            HttpRequestMessage requestmessage = new HttpRequestMessage(method, Url + "answers/ispreferred")
-            {
-                
-            };
-            requestmessage.Content = new StringContent(JsonConvert.SerializeObject(myObj), Encoding.UTF8, "application/json-patch+json");
-            var response = await client.SendAsync(requestmessage);
+            string json = JsonConvert.SerializeObject(answer);
+            await client.PatchAsync(Url + "answers/isPreferred", new StringContent(json, Encoding.UTF8, "application/json"));
         }
         public async void CloseRequest( Request request)
         {
